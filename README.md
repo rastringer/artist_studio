@@ -10,4 +10,12 @@ To get started, simply clone this repository and adjust the text in the .html fi
 git clone https://github.com/rastringer/artist_studio
 ```
 
+To run the site on localhost and begin making changes, ```cd``` into the directory and type
+
+```
+go run main.go
+```
+
+navigate to localhost:8080 and you'll see the site running.
+
 I hope to follow up with deployment ideas, however for now, see [this primer](https://cloud.google.com/appengine/docs/standard/go/quickstart) on how to deploy such a site on Google Cloud. 
