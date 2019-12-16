@@ -1,6 +1,6 @@
 # Portfolio website template
 
-<img src="images/artist_studio_sample.png" width="500" height="500" />
+<img src="images/artist_studio_sample.png" width="650" height="500" />
 
 This project is just to have some fun using Go for web development. The benefits of the language are well-documented and my intention is to make a very simple template anyone can use to build their own portfolio site. 
 
