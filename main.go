@@ -5,14 +5,13 @@ import (
 	"net/http"
 )
 
-var t *template.Template
-
-func init() {
-	t = template.Must(template.ParseGlob("templates/*"))
-}
+var t = template.Must(template.ParseGlob("templates/*.html"))
 
 func displayHome(w http.ResponseWriter, r *http.Request) {
-	t.ExecuteTemplate(w, "home", nil)
+	err := t.ExecuteTemplate(w, "home", nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func displayAbout(w http.ResponseWriter, r *http.Request) {
@@ -28,13 +27,11 @@ func displayContact(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	server := http.Server{
-		Addr: "127.0.0.1:8080",
-	}
 	http.HandleFunc("/", displayHome)
 	http.HandleFunc("/about", displayAbout)
 	http.HandleFunc("/works", displayWorks)
 	http.HandleFunc("/contact", displayContact)
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
-	server.ListenAndServe()
+	http.Handle("/templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir("./templates"))))
+	http.ListenAndServe(":8080", nil)
 }
